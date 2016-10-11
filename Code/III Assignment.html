@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="js/styles.css" type="text/css">
+</head>
+<body>
+
+<script src="js/animation.js"></script>
+<script src="js/d3.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+
+<h1>FASTory Simulator</h1>
+<h2>Drawing Robot Module</h2>
+
+
+<div>
+<svg x="10" y="0" width="1400" height="400">
+
+
+
+	<g id="WS5" transform="rotate(180 0 0) translate(-950 -300)">
+				<rect x="120" y="60" width="320" height="40" class="CNV_Filling"></rect>
+				<rect x="200" y="0" width="160" height="40" class="CNV_Filling"></rect>
+				<line x1="347" y1="12" x2="410" y2="75" class="CNV_Filling"></line> 
+				<line x1="213" y1="12" x2="140" y2="85" class="CNV_Filling"></line> 
+			<rect id="WS2_WorkPlace" x="200" y="100" width="160" height="160" style="fill:#ffcc00;stroke-width:2;stroke:#000000;fill-opacity:.2"></rect>
+			<!-- Joint -->
+			<line id="WS5_JC1" x1="150" y1="100" x2="190" y2="60" class="CNV_Filling_Joint"></line>
+			<line id="WS5_JC2" x1="370" y1="60" x2="410" y2="100" class="CNV_Filling_Joint"></line>
+			<!-- Main Conveyor--> 
+			<line id="WS5_MC1" x1="120" y1="60" x2="140" y2="60" stroke="#ff0000" stroke-width="3"></line> 
+			<line id="WS5_MC2" x1="140" y1="60" x2="190" y2="60" style="stroke:#ff0000;stroke-width:3"></line> 
+			<line id="WS5_MC3" x1="190" y1="60" x2="370" y2="60" style="stroke:#ff0000;stroke-width:3"></line> 
+			<line id="WS5_MC4" x1="370" y1="60" x2="420" y2="60" style="stroke:#ff0000;stroke-width:3"></line> 
+			<line id="WS5_MC5" x1="420" y1="60" x2="440" y2="60" style="stroke:#ff0000;stroke-width:3"></line>
+			<line id="WS5_MC6" x1="120" y1="100" x2="150" y2="100" style="stroke:#ff0000;stroke-width:3"></line>
+			<line id="WS5_MC7" x1="150" y1="100" x2="410" y2="100" style="stroke:#ff0000;stroke-width:3"></line>
+			<line id="WS5_MC8" x1="410" y1="100" x2="440" y2="100" style="stroke:#ff0000;stroke-width:3"></line>
+			<!-- Bypass Conveyor-->
+			<line id="WS5_BC1" x1="190" y1="60" x2="210" y2="40" style="stroke:#ff0000;stroke-width:3"></line>
+			<line id="WS5_BC2" x1="210" y1="40" x2="350" y2="40" style="stroke:#ff0000;stroke-width:3"></line>
+			<line id="WS5_BC3" x1="350" y1="40" x2="370" y2="60" style="stroke:#ff0000;stroke-width:3"></line>	
+			<line id="WS5_BC4" x1="140" y1="60" x2="200" y2="0" style="stroke:#ff0000;stroke-width:3"></line>
+			<line id="WS5_BC5" x1="200" y1="0" x2="360" y2="0" style="stroke:#ff0000;stroke-width:3"></line>
+			<line id="WS5_BC6" x1="360" y1="0" x2="420" y2="60" style="stroke:#ff0000;stroke-width:3"></line>
+			<!-- Sensors-->
+			<circle id="WS5_Sensor1" cx="430" cy="50" r="6" class="Presence_Sensor_OFF"></circle>
+			<circle id="WS5_Sensor2" cx="325" cy="50" r="6" class="Presence_Sensor_OFF"></circle>
+			<circle id="WS5_Sensor3" cx="280" cy="50" r="6" class="Presence_Sensor_OFF"></circle>
+			<circle id="WS5_Sensor4" cx="240" cy="-10" r="6" class="Presence_Sensor_OFF"></circle>
+			<rect id="WS5_RFSensor" x="422.5" y="25" width="15" height="15" class="RFID_Sensor_OFF"></rect>
+			<!-- Stopper -->
+			<polygon id="WS5_Stopper1" points="430,100 435,110 425,110" class="Stopper_ON"></polygon>
+			<polygon id="WS5_Stopper2" points="325,100 320,110 330,110" class="Stopper_ON"></polygon>
+			<polygon id="WS5_Stopper3" points="280,100 285 110 275,110" class="Stopper_ON"></polygon>
+			<polygon id="WS5_Stopper4" points="240,40 235,50 245, 50" class="Stopper_ON"></polygon>
+			<polygon id="WS5_Stopper5" points="130,100 125,110 135,110" class="Stopper_ON"></polygon>
+			<!-- Pallets-->
+			<g id="WS5_PalletZone1" transform="translate(423 67)" width="26" height="25">
+				<rect id="WS5_PalletZone1_Pallet" x="0" y="0" width="26" height="25" style="fill: rgb(0, 0, 0); stroke-width: 2px; stroke: rgb(0, 0, 0); visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone1_Paper" x="2" y="4" width="22" height="17" style="fill: rgb(255, 255, 255); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone1_Cover" x="5" y="8" width="16" height="9" style="fill: rgb(0, 0, 0); stroke-width: 2px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone1_Screen" x="6" y="9" width="5" height="7" style="fill: rgb(0, 0, 0); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone1_Keyboard" x="13" y="9" width="7" height="7" style="fill: rgb(0, 0, 0); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+			</g>
+			<g id="WS5_PalletZone2" transform="translate(319 67)" width="26" height="25">
+				<rect id="WS5_PalletZone2_Pallet" x="0" y="0" width="26" height="25" style="fill: rgb(0, 0, 0); stroke-width: 2px; stroke: rgb(0, 0, 0); visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone2_Paper" x="2" y="4" width="22" height="17" style="fill: rgb(255, 255, 255); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone2_Cover" x="5" y="8" width="16" height="9" style="fill: rgb(0, 0, 0); stroke-width: 2px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone2_Screen" x="6" y="9" width="5" height="7" style="fill: rgb(0, 0, 0); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone2_Keyboard" x="13" y="9" width="7" height="7" style="fill: rgb(0, 0, 0); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+			</g>
+			<g id="WS5_PalletZone3" transform="translate(273 67)" width="26" height="25">
+				<rect id="WS5_PalletZone3_Pallet" x="0" y="0" width="26" height="25" style="fill: rgb(0, 0, 0); stroke-width: 2px; stroke: rgb(0, 0, 0); visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone3_Paper" x="2" y="4" width="22" height="17" style="fill: rgb(255, 255, 255); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone3_Cover" x="5" y="8" width="16" height="9" style="fill: rgb(0, 0, 0); stroke-width: 2px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone3_Screen" x="6" y="9" width="5" height="7" style="fill: rgb(0, 0, 0); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone3_Keyboard" x="13" y="9" width="7" height="7" style="fill: rgb(0, 0, 0); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+			</g>
+			<g id="WS5_PalletZone4" transform="translate(233 7)" width="26" height="25">
+				<rect id="WS5_PalletZone4_Pallet" x="0" y="0" width="26" height="25" style="fill: rgb(0, 0, 0); stroke-width: 2px; stroke: rgb(0, 0, 0); visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone4_Paper" x="2" y="4" width="22" height="17" style="fill: rgb(255, 255, 255); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone4_Cover" x="5" y="8" width="16" height="9" style="fill: rgb(0, 0, 0); stroke-width: 2px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone4_Screen" x="6" y="9" width="5" height="7" style="fill: rgb(0, 0, 0); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone4_Keyboard" x="13" y="9" width="7" height="7" style="fill: rgb(0, 0, 0); stroke-width: 1px; stroke: none; visibility: hidden;" visibility="hidden"></rect>
+			</g>
+			<g id="WS5_PalletZone5" transform="translate(103 67)" width="26" height="25">
+				<rect id="WS5_PalletZone5_Pallet" x="0" y="0" width="26" height="25" style="fill:#000000;stroke-width:2;stroke:#000000" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone5_Paper" x="2" y="4" width="22" height="17" style="fill:#ffffff;stroke-width:1;stroke:none" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone5_Cover" x="5" y="8" width="16" height="9" style="fill:#ff0000;stroke-width:2;stroke:none" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone5_Screen" x="6" y="9" width="5" height="7" style="fill:#00ff00;stroke-width:1;stroke:none" visibility="hidden"></rect>
+				<rect id="WS5_PalletZone5_Keyboard" x="13" y="9" width="7" height="7" style="fill:#0000ff;stroke-width:1;stroke:none" visibility="hidden"></rect>
+			</g>
+		
+			<!-- Robot Arm -->
+			<line id="WS5_Arm1" x1="280" y1="180" x2="225" y2="155" style="stroke:#006600;stroke-width:10"></line>
+			<line id="WS5_Arm2" x1="225" y1="155" x2="280" y2="130" style="stroke:#006600;stroke-width:10"></line>
+			<circle id="WS5_Joint1" cx="280" cy="180" r="5" stroke="black" stroke-width="3" fill="orange"></circle>
+			<circle id="WS5_Joint3" cx="225" cy="155" r="5" stroke="black" stroke-width="3" fill="orange"></circle>
+			<circle id="WS5_Joint2" cx="280" cy="130" r="5" stroke="black" stroke-width="3" fill="orange" style="fill: rgb(255, 0, 0);"></circle>
+				<!-- Maintenance panel -->
+					<g id="WS5_Maintenance" transform="translate(200 210)" visibility="hidden">
+						<rect id="WS5_RedRefill" x="7" y="0" width="44" height="44" style="fill:#ffffff;stroke:black"></rect>	
+						<rect id="WS5_GreenRefill" x="58" y="0" width="44" height="44" style="fill:#ffffff;stroke:black"></rect>	
+						<rect id="WS5_BlueRefill" x="109" y="0" width="44" height="44" style="fill:#ffffff;stroke:black"></rect>
+						<rect id="WS5_RedInk" x="7" y="0" width="44" height="44" style="fill:#ff0000;stroke:black"></rect>	
+						<rect id="WS5_GreenInk" x="58" y="0" width="44" height="44" style="fill:#00ff00;stroke:black"></rect>	
+						<rect id="WS5_BlueInk" x="109" y="0" width="44" height="44" style="fill:#0000ff;stroke:black"></rect>
+						<image id="WS5_YellowAlarm" x="80" ,="" y="-75" width="80" height="80" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="yellow-warning-sign.png" style="fill:#ff4400;fill-opacity:.2" visibility="hidden"></image>
+						<image id="WS5_RedAlarm" x="80" ,="" y="-75" width="80" height="80" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="red-warning-sign.png" style="fill:#ff4400;fill-opacity:.2" visibility="hidden"></image>
+					</g>
+		</g>
+
+</svg>
+</div>
+
+<div   style="width: 50%;height: 320px;border: 2px solid #a1a1a1; padding: 20px;  background: #dddddd; border-radius: 25px;  margin-left: 25%;">
+			<div style="float:left; width:30%; padding-top: 57px;">
+				<!--<div style=" height: 40px; width: 160px;">
+					<text style="font-family:Verdana;font-size:150%;width: 100%;height: 100%">Work Station</text>
+				</div>
+				<div style=" height: 40px; ">
+					<text id="WS5_ConveyorState" style="font-family:Verdana;font-size:100%;width: 100%;height: 100%">Conveyor:IDLE</text>
+				</div>
+				<div style=" height: 40px; ">
+					<text id="WS5_RobotState" style="font-family:Verdana;font-size:100%;width: 100%;height: 100%">Robot:IDLE</text>
+				</div>-->
+			</div>
+			<div style="float:left; width:30%; padding: 8px 19px 0px 19px;">
+				<div style=" height: 40px; padding-bottom: 5px;">
+					<button  onclick = "add_pallet1()" id="WS5_ButtonLoad" type="button" style="font-family:Verdana;font-size:150%;width: 100%;height: 100%">Load</button>
+				</div>
+				<div style=" height: 40px; padding-bottom: 5px;">
+					<button  onclick = "move_pallet12()" id="WS5_Button12" type="button" style="font-family:Verdana;font-size:150%;width: 100%;height: 100%">1 - 2</button>
+				</div>
+				<div style=" height: 40px; padding-bottom: 5px;">
+					<button onclick = "move_pallet23()" id="WS5_Button23" type="button" style="font-family:Verdana;font-size:150%;width: 100%;height: 100%">2 - 3</button>
+				</div>
+				<div style=" height: 40px; padding-bottom: 5px;">
+					<button  onclick = "move_pallet35()" id="WS5_Button35" type="button" style="font-family:Verdana;font-size:150%;width: 100%;height: 100%">3 - 5</button>
+				</div>
+				<div style=" height: 40px; padding-bottom: 5px;">
+					<button onclick = "move_pallet14()" id="WS5_Button14" type="button" style="font-family:Verdana;font-size:150%;width: 100%;height: 100%">1 - 4</button>
+				</div>
+				<div style=" height: 40px; padding-bottom: 5px;">
+					<button onclick = "move_pallet45()" id="WS5_Button45" type="button" style="font-family:Verdana;font-size:150%;width: 100%;height: 100%">4 - 5</button>
+				</div>
+				<div style=" height: 40px; padding-bottom: 5px;">
+					<button onclick = "move_palletout()" id="WS5_ButtonMoveOUt" type="button" style="font-family:Verdana;font-size:150%;width: 100%;height: 100%">Un Load</button>
+				</div>
+			</div>
+			<div style="float:left; width:30%">
+				<!--<div style=" height: 40px;">
+					<button ng-click="send('ROB5','ChangePenRED')" id="WS5_SelectRED" type="button" style="background: #ff00ff;width: 30%;height: 100%"></button>
+					<button ng-click="send('ROB5','ChangePenGREEN')" id="WS5_SelectGREEN" type="button" style="background: #b3ffff;width: 30%;height: 100%"></button>
+					<button ng-click="send('ROB5','ChangePenBLUE')" id="WS5_SelectBLUE" type="button" style="background: #ffc266;width: 30%;height: 100%"></button>
+				</div><br>
+				<div style=" height: 40px; ">
+					<text style="font-family:Verdana;font-size:130%;width: 22%;height: 100%">Fr</text>
+					<button ng-click="send('ROB5','Draw1')" id="WS5_DrawFrame1" type="button" style="background: #dddddd;width: 22%;height: 100%;font-family:Verdana;font-size:130%;">1</button>
+					<button ng-click="send('ROB5','Draw2')" id="WS5_DrawFrame2" type="button" style="background: #dddddd;width: 22%;height: 100%;font-family:Verdana;font-size:130%;">2</button>
+					<button ng-click="send('ROB5','Draw3')" id="WS5_DrawFrame3" type="button" style="background: #dddddd;width: 22%;height: 100%;font-family:Verdana;font-size:130%;">3</button>
+				</div><br>
+				<div style=" height: 40px; ">
+					<text style="font-family:Verdana;font-size:130%;width: 22%;height: 100%">Sc</text>
+					<button ng-click="send('ROB5','Draw4')" id="WS5_DrawScreen1" type="button" style="background: #dddddd;width: 22%;height: 100%;font-family:Verdana;font-size:130%;">1</button>
+					<button ng-click="send('ROB5','Draw5')" id="WS5_DrawScreen2" type="button" style="background: #dddddd;width: 22%;height: 100%;font-family:Verdana;font-size:130%;">2</button>
+					<button ng-click="send('ROB5','Draw6')" id="WS5_DrawScreen3" type="button" style="background: #dddddd;width: 22%;height: 100%;font-family:Verdana;font-size:130%;">3</button>
+				</div><br>
+				<div style=" height: 40px; ">
+					<text style="font-family:Verdana;font-size:130%;width: 22%;height: 100%">KP</text>
+					<button ng-click="send('ROB5','Draw7')" id="WS5_DrawKeyboard1" type="button" style="background: #dddddd;width: 22%;height: 100%;font-family:Verdana;font-size:130%;">1</button>
+					<button ng-click="send('ROB5','Draw8')" id="WS5_DrawKeyboard2" type="button" style="background: #dddddd;width: 22%;height: 100%;font-family:Verdana;font-size:130%;">2</button>
+					<button ng-click="send('ROB5','Draw9')" id="WS5_DrawKeyboard3" type="button" style="background: #dddddd;width: 22%;height: 100%;font-family:Verdana;font-size:130%;">3</button>
+				</div>
+			</div>
+			<button  onclick = "add_pallet1()">Insert Pallet</button><br>
+			<button onclick = "move_pallet12()">Move 1  2</button><br>-->
+</div>
+
+</body>
+</html>

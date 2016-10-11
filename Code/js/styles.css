@@ -1,0 +1,46 @@
+rect.CNV_Filling 
+{
+	stroke:none;
+	fill:#66ccff;
+}
+
+line.CNV_Filling
+{
+	stroke:#66ccff;
+	stroke-width:30
+}
+						
+circle.Presence_Sensor_OFF
+{
+	fill:#ffffff;
+	stroke:#000000;
+	stroke-width:2
+}
+						
+polygon.Stopper_ON
+{
+	fill:#ff0000;
+	stroke:#000000;
+	stroke-width:1
+}
+						
+polygon.Stopper_OFF
+{
+	fill:#ffffff;
+	stroke:#000000;
+	stroke-width:1
+}
+						
+path.CNV_Filling
+{
+	fill:#cccccc;
+	stroke-width:3;
+	stroke:#ff0000
+}
+						
+rect.RFID_Sensor_OFF
+{
+	fill:#ffffff;
+	stroke-width:2;
+	stroke:#000000
+}

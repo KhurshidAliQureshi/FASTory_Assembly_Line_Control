@@ -1,0 +1,64 @@
+rect.CNV_Filling 
+{
+	stroke:none;
+	fill:#66ccff;
+}
+
+line.CNV_Filling
+{
+	stroke:#66ccff;
+	stroke-width:30
+}
+						
+circle.Presence_Sensor_OFF
+{
+	fill:#ffffff;
+	stroke:#000000;
+	stroke-width:2
+}
+						
+polygon.Stopper_ON
+{
+	fill:#ff0000;
+	stroke:#000000;
+	stroke-width:1
+}
+						
+polygon.Stopper_OFF
+{
+	fill:#ffffff;
+	stroke:#000000;
+	stroke-width:1
+}
+						
+path.CNV_Filling
+{
+	fill:#cccccc;
+	stroke-width:3;
+	stroke:#ff0000
+}
+						
+rect.RFID_Sensor_OFF
+{
+	fill:#ffffff;
+	stroke-width:2;
+	stroke:#000000
+}
+
+.my-svg-container{
+ display: inline-block;
+ position: relative;
+ width: 100%;
+ padding-bottom: 30%; /* depends on svg ratio, for my zebra height/width = 1.2 so padding-bottom = 50% * 1.2 = 60% */
+ 
+ vertical-align: middle; /* top | middle | bottom ... do what you want */
+}
+
+
+.my-svg{ /* svg into : object, img or inline */
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%; /* only required for <img /> */
+}
